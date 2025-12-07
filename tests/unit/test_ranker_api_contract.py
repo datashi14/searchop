@@ -1,6 +1,4 @@
 """Test API contract and request/response schemas."""
-import pytest
-from pydantic import ValidationError
 import sys
 from pathlib import Path
 

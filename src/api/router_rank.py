@@ -1,7 +1,6 @@
 """Ranking endpoint router."""
-from fastapi import APIRouter, HTTPException
-from typing import List
 import time
+from fastapi import APIRouter, HTTPException
 
 from src.api.schemas import RankRequest, RankResponse, RankedProduct
 from src.api.monitoring import (

@@ -1,19 +1,20 @@
 """FastAPI application for ranking service."""
-from fastapi import FastAPI
-from fastapi.responses import Response
-from contextlib import asynccontextmanager
 import sys
 from pathlib import Path
+from contextlib import asynccontextmanager
 
 # Add project root to path
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.api.router_rank import router
-from src.api.schemas import HealthResponse
-from src.api.monitoring import get_metrics, get_metrics_content_type, model_version
-from src.utils.config import CURRENT_MODEL_VERSION_FILE
-from src.utils.logging_utils import setup_logging
+from fastapi import FastAPI  # noqa: E402
+from fastapi.responses import Response  # noqa: E402
+
+from src.api.router_rank import router  # noqa: E402
+from src.api.schemas import HealthResponse  # noqa: E402
+from src.api.monitoring import get_metrics, get_metrics_content_type, model_version  # noqa: E402
+from src.utils.config import CURRENT_MODEL_VERSION_FILE  # noqa: E402
+from src.utils.logging_utils import setup_logging  # noqa: E402
 
 logger = setup_logging()
 

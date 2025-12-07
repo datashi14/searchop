@@ -1,13 +1,14 @@
 """Test catalog data schema and invariants."""
-import pytest
-import pandas as pd
 import sys
 from pathlib import Path
+
+import pandas as pd
+import pytest
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.utils.config import CATALOG_FILE
+from src.utils.config import CATALOG_FILE  # noqa: E402
 
 
 @pytest.mark.integration

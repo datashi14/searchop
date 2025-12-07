@@ -1,13 +1,14 @@
 """Test feature store schema and invariants."""
-import pytest
-import pandas as pd
 import sys
 from pathlib import Path
+
+import pandas as pd
+import pytest
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.utils.config import FEATURE_STORE_FILE
+from src.utils.config import FEATURE_STORE_FILE  # noqa: E402
 
 
 @pytest.mark.integration
@@ -60,7 +61,6 @@ def test_feature_store_invariants():
     assert df["product_id"].nunique() > 1, "Should have multiple unique products"
     
     # Query-product pairs should be unique (or at least have reasonable distribution)
-    pair_counts = df.groupby(["query", "product_id"]).size()
     # Most pairs should appear once, but some duplicates are OK for aggregation
     
     # Rates should follow logical relationships

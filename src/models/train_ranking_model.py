@@ -1,13 +1,12 @@
 """Train ranking model on feature store."""
-import pandas as pd
-import numpy as np
-import pickle
 import json
+import pickle
 from pathlib import Path
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import roc_auc_score, log_loss, classification_report
+
 import lightgbm as lgb
-import sys
+import pandas as pd
+from sklearn.metrics import log_loss, roc_auc_score
+from sklearn.model_selection import train_test_split
 
 from src.utils.config import (
     FEATURE_STORE_FILE, MODELS_DIR, CURRENT_MODEL_VERSION_FILE
@@ -126,7 +125,6 @@ def evaluate_model(model: lgb.Booster, X: pd.DataFrame, y: pd.Series,
     
     # Get predictions
     y_pred_proba = model.predict(X)
-    y_pred = (y_pred_proba > 0.5).astype(int)
     
     # Compute metrics
     auc = roc_auc_score(y, y_pred_proba) if y.nunique() > 1 else 0.0

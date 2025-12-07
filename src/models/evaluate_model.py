@@ -1,11 +1,11 @@
 """Evaluate model on offline evaluation dataset."""
-import pandas as pd
-import numpy as np
 import json
 import pickle
 from pathlib import Path
-from typing import Dict, List, Tuple
-import sys
+from typing import Dict, List
+
+import numpy as np
+import pandas as pd
 
 from src.utils.config import (
     FEATURE_STORE_FILE, MODELS_DIR, CURRENT_MODEL_VERSION_FILE

@@ -1,13 +1,14 @@
 """Test events data schema and invariants."""
-import pytest
-import pandas as pd
 import sys
 from pathlib import Path
+
+import pandas as pd
+import pytest
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.utils.config import EVENTS_FILE
+from src.utils.config import EVENTS_FILE  # noqa: E402
 
 
 @pytest.mark.integration
@@ -54,21 +55,21 @@ def test_events_invariants():
     df["timestamp"] = pd.to_datetime(df["timestamp"])
     
     # Event funnel logic: if purchased, must have clicked and add_to_cart
-    purchased_events = df[df["purchased"] == True]
+    purchased_events = df[df["purchased"]]
     if len(purchased_events) > 0:
-        assert (purchased_events["clicked"] == True).all(), \
+        assert purchased_events["clicked"].all(), \
             "Purchased events must have clicked=True"
-        assert (purchased_events["add_to_cart"] == True).all(), \
+        assert purchased_events["add_to_cart"].all(), \
             "Purchased events must have add_to_cart=True"
     
     # If add_to_cart, must have clicked
-    atc_events = df[df["add_to_cart"] == True]
+    atc_events = df[df["add_to_cart"]]
     if len(atc_events) > 0:
-        assert (atc_events["clicked"] == True).all(), \
+        assert atc_events["clicked"].all(), \
             "add_to_cart events must have clicked=True"
     
     # Event type should match boolean flags
-    assert (df[df["event_type"] == "purchase"]["purchased"] == True).all(), \
+    assert df[df["event_type"] == "purchase"]["purchased"].all(), \
         "purchase events should have purchased=True"
     
     # Should have events from multiple users

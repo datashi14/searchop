@@ -1,25 +1,34 @@
 """Dagster pipeline for MLOps: data ingestion, feature engineering, and model retraining."""
-from dagster import (
-    op, job, schedule, DefaultScheduleStatus, Config,
-    AssetMaterialization, MetadataValue
-)
-from dagster import repository
-import pandas as pd
 import sys
 from pathlib import Path
+
+import pandas as pd
+from dagster import (  # noqa: E402
+    AssetMaterialization,
+    Config,
+    DefaultScheduleStatus,
+    MetadataValue,
+    job,
+    op,
+    repository,
+    schedule,
+)
 
 # Add project root to path
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.data_ingestion.generate_synthetic_data import main as generate_data
-from src.data_ingestion.build_feature_store import main as build_features
-from src.models.train_ranking_model import main as train_model
-from src.models.evaluate_model import main as evaluate_model
-from src.utils.config import (
-    CATALOG_FILE, EVENTS_FILE, FEATURE_STORE_FILE, MODELS_DIR
+from src.data_ingestion.generate_synthetic_data import main as generate_data  # noqa: E402
+from src.data_ingestion.build_feature_store import main as build_features  # noqa: E402
+from src.models.evaluate_model import main as evaluate_model  # noqa: E402
+from src.models.train_ranking_model import main as train_model  # noqa: E402
+from src.utils.config import (  # noqa: E402
+    CATALOG_FILE,
+    EVENTS_FILE,
+    FEATURE_STORE_FILE,
+    MODELS_DIR,
 )
-from src.utils.logging_utils import setup_logging
+from src.utils.logging_utils import setup_logging  # noqa: E402
 
 logger = setup_logging()
 

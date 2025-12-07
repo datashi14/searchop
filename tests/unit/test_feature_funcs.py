@@ -1,15 +1,11 @@
 """Test feature engineering functions."""
-import pytest
-import pandas as pd
-import numpy as np
-from datetime import datetime, timedelta
 import sys
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.data_ingestion.build_feature_store import (
+from src.data_ingestion.build_feature_store import (  # noqa: E402
     compute_product_features,
     compute_query_product_features,
     compute_tfidf_similarity,

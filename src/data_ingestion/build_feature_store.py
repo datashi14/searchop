@@ -1,7 +1,5 @@
 """Build feature store from catalog and clickstream data."""
 import pandas as pd
-import numpy as np
-from pathlib import Path
 from datetime import datetime, timedelta
 
 from src.utils.config import (
@@ -227,7 +225,7 @@ def main():
     logger.info(f"Total query-product pairs: {len(feature_store)}")
     logger.info(f"Unique queries: {feature_store['query'].nunique()}")
     logger.info(f"Unique products: {feature_store['product_id'].nunique()}")
-    logger.info(f"\nFeature ranges:")
+    logger.info("\nFeature ranges:")
     logger.info(f"  CTR: {feature_store['ctr'].min():.4f} - {feature_store['ctr'].max():.4f}")
     logger.info(f"  Purchase rate: {feature_store['purchase_rate'].min():.4f} - {feature_store['purchase_rate'].max():.4f}")
     logger.info(f"  Query CTR: {feature_store['query_ctr'].min():.4f} - {feature_store['query_ctr'].max():.4f}")

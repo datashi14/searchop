@@ -1,7 +1,6 @@
 """Monitoring and metrics."""
 from prometheus_client import Counter, Histogram, Gauge, generate_latest
 from prometheus_client import CONTENT_TYPE_LATEST
-import time
 
 # Metrics
 request_count = Counter(

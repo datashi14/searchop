@@ -1,10 +1,8 @@
 """Model inference utilities."""
-import pandas as pd
-import numpy as np
 import pickle
-from pathlib import Path
-from typing import List, Dict, Optional
-import sys
+from typing import Dict, List, Optional
+
+import pandas as pd
 
 from src.utils.config import (
     FEATURE_STORE_FILE, MODELS_DIR, CURRENT_MODEL_VERSION_FILE

@@ -3,13 +3,12 @@
 This is the original simple generator. For more realistic demo data,
 use scripts/generate_demo_data.py instead.
 """
+import random
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
-from pathlib import Path
-import random
 
-from src.utils.config import RAW_DATA_DIR, CATALOG_FILE, EVENTS_FILE
+from src.utils.config import CATALOG_FILE, EVENTS_FILE
 from src.utils.logging_utils import setup_logging
 
 logger = setup_logging()
