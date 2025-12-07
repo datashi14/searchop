@@ -16,10 +16,34 @@ echo ""
 
 # Check prerequisites
 echo "Checking prerequisites..."
-command -v aws >/dev/null 2>&1 || { echo "Error: aws CLI not found"; exit 1; }
-command -v terraform >/dev/null 2>&1 || { echo "Error: terraform not found"; exit 1; }
-command -v kubectl >/dev/null 2>&1 || { echo "Error: kubectl not found"; exit 1; }
-command -v docker >/dev/null 2>&1 || { echo "Error: docker not found"; exit 1; }
+MISSING_TOOLS=()
+
+command -v aws >/dev/null 2>&1 || MISSING_TOOLS+=("aws CLI")
+command -v terraform >/dev/null 2>&1 || MISSING_TOOLS+=("terraform")
+command -v kubectl >/dev/null 2>&1 || MISSING_TOOLS+=("kubectl")
+command -v docker >/dev/null 2>&1 || MISSING_TOOLS+=("docker")
+
+if [ ${#MISSING_TOOLS[@]} -ne 0 ]; then
+    echo "❌ Missing prerequisites:"
+    for tool in "${MISSING_TOOLS[@]}"; do
+        echo "   - $tool"
+    done
+    echo ""
+    echo "Installation guides:"
+    echo "  AWS CLI: https://aws.amazon.com/cli/"
+    echo "  Terraform: https://developer.hashicorp.com/terraform/downloads"
+    echo "  kubectl: https://kubernetes.io/docs/tasks/tools/"
+    echo "  Docker: https://www.docker.com/products/docker-desktop"
+    echo ""
+    echo "Windows quick install:"
+    echo "  # Terraform (using Chocolatey)"
+    echo "  choco install terraform"
+    echo ""
+    echo "  # Or download from:"
+    echo "  https://releases.hashicorp.com/terraform/"
+    exit 1
+fi
+
 echo "✅ All prerequisites met"
 echo ""
 
