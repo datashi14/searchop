@@ -1,0 +1,31 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: searchop
+
+resources:
+  - ../../deployment-api.yaml
+  - ../../service-api.yaml
+  - ../../hpa-api.yaml
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: searchop-api:latest
+    target:
+      kind: Deployment
+      name: searchop-api
+  - patch: |-
+      - op: remove
+        path: /spec/volumes
+    target:
+      kind: Deployment
+      name: searchop-api
+  - patch: |-
+      - op: remove
+        path: /spec/template/spec/containers/0/volumeMounts
+    target:
+      kind: Deployment
+      name: searchop-api
+

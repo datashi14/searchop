@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: searchop-api
+  labels:
+    app: searchop-api
+    component: ranking-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: searchop-api
+  template:
+    metadata:
+      labels:
+        app: searchop-api
+        component: ranking-service
+    spec:
+      containers:
+      - name: api
+        image: searchop-api:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+          name: http
+          protocol: TCP
+        env:
+        - name: MODEL_PATH
+          value: "/app/models"
+        - name: FEATURE_STORE_PATH
+          value: "/app/data/processed/feature_store.parquet"
+        - name: PYTHONPATH
+          value: "/app"
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        volumeMounts:
+        - name: models
+          mountPath: /app/models
+        - name: feature-store
+          mountPath: /app/data/processed
+      volumes:
+      - name: models
+        persistentVolumeClaim:
+          claimName: searchop-models-pvc
+      - name: feature-store
+        persistentVolumeClaim:
+          claimName: searchop-features-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: searchop-models-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: searchop-features-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
+

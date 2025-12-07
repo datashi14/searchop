@@ -40,7 +40,13 @@ def load_model(version: str = None):
     
     logger.info(f"Loading model: {model_path}")
     with open(model_path, "rb") as f:
-        model = pickle.load(f)
+        model_data = pickle.load(f)
+    
+    # Handle both dict format (from train script) and direct model
+    if isinstance(model_data, dict):
+        model = model_data["model"]
+    else:
+        model = model_data
     
     return model, version
 

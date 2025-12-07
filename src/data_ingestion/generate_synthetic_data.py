@@ -1,4 +1,8 @@
-"""Generate synthetic e-commerce catalog and clickstream data."""
+"""Generate synthetic e-commerce catalog and clickstream data.
+
+This is the original simple generator. For more realistic demo data,
+use scripts/generate_demo_data.py instead.
+"""
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
