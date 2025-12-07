@@ -27,3 +27,4 @@ Building the data generation and feature engineering pipeline as the foundation 
 - Color scheme: #73AD6D as primary color
 - Verify each component before moving to next step
 
+

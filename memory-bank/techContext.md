@@ -43,3 +43,4 @@
 - Local model registry (can be extended to S3)
 - Basic monitoring (can be extended to full Grafana dashboards)
 
+

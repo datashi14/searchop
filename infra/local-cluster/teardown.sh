@@ -9,3 +9,4 @@ kind delete cluster --name searchop-local || true
 
 echo "Cluster deleted."
 
+

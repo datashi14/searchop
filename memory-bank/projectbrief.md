@@ -50,3 +50,4 @@ Building a realistic AI search/MLOps pipeline for an e-commerce catalog that dem
 - Production-ready patterns (monitoring, CI/CD, versioning)
 - Demonstrates MLOps best practices
 
+

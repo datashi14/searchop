@@ -324,3 +324,4 @@ SearchOp is **not a skeleton**. It's a **production-ready reference implementati
 
 The code is real, runnable, and deployable. It demonstrates senior MLOps capabilities.
 
+

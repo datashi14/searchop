@@ -109,3 +109,4 @@ def test_metrics_structure():
     assert isinstance(metrics["num_queries"], int)
     assert isinstance(metrics["num_evaluated"], int)
 
+

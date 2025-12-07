@@ -41,3 +41,4 @@ echo "  1. Build and load Docker image: make kind-load-image"
 echo "  2. Deploy: make kind-deploy"
 echo ""
 
+

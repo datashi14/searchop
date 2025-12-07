@@ -27,3 +27,4 @@ kubectl port-forward -n searchop service/searchop-api 8000:80
 curl http://localhost:8000/health
 ```
 
+

@@ -316,3 +316,4 @@ kubectl describe hpa searchop-api-hpa
 - [ ] Add shadow mode for model testing
 - [ ] Set up alerting
 
+
